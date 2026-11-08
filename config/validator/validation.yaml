@@ -1,0 +1,96 @@
+App\Entity\Location:
+    properties:
+        city:
+            - NotBlank:
+                  message: 'Enter the city name.'
+                  groups: [new, edit]
+            - Length:
+                  min: 2
+                  max: 255
+                  minMessage: 'City name must have at least 2 characters.'
+                  maxMessage: 'City name cannot exceed 255 characters.'
+                  groups: [new, edit]
+
+        country:
+            - NotBlank:
+                  message: 'Select a country.'
+                  groups: [new, edit]
+            - Choice:
+                  choices: [PL, DE, FR, ES, IT, GB, US]
+                  message: 'Select a country from the list.'
+                  groups: [new, edit]
+
+        latitude:
+            - NotBlank:
+                  message: 'Enter the latitude.'
+                  groups: [new, edit]
+            - Range:
+                  min: -90
+                  max: 90
+                  notInRangeMessage: 'Latitude must be between -90 and 90.'
+                  groups: [new, edit]
+
+        longitude:
+            - NotBlank:
+                  message: 'Enter the longitude.'
+                  groups: [new, edit]
+            - Range:
+                  min: -180
+                  max: 180
+                  notInRangeMessage: 'Longitude must be between -180 and 180.'
+                  groups: [new, edit]
+
+App\Entity\Measurement:
+    properties:
+        location:
+            - NotNull:
+                  message: 'Select a location.'
+                  groups: [new, edit]
+
+        date:
+            - NotBlank:
+                  message: 'Enter the forecast date.'
+                  groups: [new, edit]
+            - GreaterThan:
+                  value: 'today'
+                  message: 'A new forecast must have a future date.'
+                  groups: [new]
+
+        celsius:
+            - NotBlank:
+                  message: 'Enter the temperature.'
+                  groups: [new, edit]
+            - Range:
+                  min: -90
+                  max: 60
+                  notInRangeMessage: 'Temperature must be between -90 and 60.'
+                  groups: [new, edit]
+
+        humidity:
+            - NotNull:
+                  message: 'Enter the humidity.'
+                  groups: [new, edit]
+            - Range:
+                  min: 0
+                  max: 100
+                  notInRangeMessage: 'Humidity must be between 0 and 100.'
+                  groups: [new, edit]
+
+        pressure:
+            - NotNull:
+                  message: 'Enter the pressure.'
+                  groups: [new, edit]
+            - Range:
+                  min: 850
+                  max: 1100
+                  notInRangeMessage: 'Pressure must be between 850 and 1100 hPa.'
+                  groups: [new, edit]
+
+        condition:
+            - NotBlank:
+                  message: 'Enter the weather description.'
+                  groups: [new, edit]
+            - Length:
+                  max: 255
+                  maxMessage: 'Weather description cannot exceed 255 characters.'
+                  groups: [new, edit]
